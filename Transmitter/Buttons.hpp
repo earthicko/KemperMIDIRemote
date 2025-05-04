@@ -52,7 +52,7 @@ public:
   void begin(void);
   void update(void);
 
-  int dequeueEvent(int pinNum); // Dequeue a button event
+  void dequeueEvent(int *pinNumReturn, int *eventReturn); // Dequeue a button event
 
 private:
   int numButtons;                   // Number of buttons

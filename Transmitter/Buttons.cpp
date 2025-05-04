@@ -135,12 +135,15 @@ void Buttons::update(void) {
   }
 }
 
-int Buttons::dequeueEvent(int pinNum) {
-  // Dequeue event for a specific button
+void Buttons::dequeueEvent(int *pinNumReturn, int *eventReturn) {
   for (int i = 0; i < this->numButtons; i++) {
-    if (this->buttonPins[i] == pinNum) {
-      return this->buttons[i].dequeueEvent();
+    int event = this->buttons[i].dequeueEvent();
+    if (event != -1) {
+      *pinNumReturn = this->buttonPins[i];
+      *eventReturn = event;
+      return; // Event found
     }
   }
-  return -1; // Button not found or no event
+  *pinNumReturn = -1; // Button not found
+  *eventReturn = -1;  // No event
 }
