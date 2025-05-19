@@ -1,13 +1,14 @@
 // Buttons.cpp
 #include "Buttons.hpp"
 #include "SerialPrintf.hpp"
+#include <Arduino.h>
 
 Button::Button() {}
 
 Button::~Button() {}
 
 void Button::begin(int pin) {
-  SerialPrintf("Button::begin pin: %d\n", pin);
+  serial_printf("Button::begin pin: %d\n", pin);
   this->pin = pin;
   this->state = BUTTONS_STATE_LIFTED;
   this->lastDebounceTime = 0;
@@ -73,8 +74,8 @@ void Button::update(void) {
   }
 
 #ifdef BUTTONS_DEBUG
-  SerialPrintf("Pin %d: State: %d, Debounce Time: %lu\n", pin, this->state,
-               this->lastDebounceTime);
+  serial_printf("Pin %d: State: %d, Debounce Time: %lu\n", pin, this->state,
+                this->lastDebounceTime);
 #endif
 }
 
@@ -85,14 +86,14 @@ int Button::dequeueEvent(void) {
   int event = eventQueue[queueHead];
   queueHead = (queueHead + 1) % BUTTONS_QUEUESIZE;
 #ifdef BUTTONS_DEBUG
-  SerialPrintf("Dequeue event: %d\n", event);
+  serial_printf("Dequeue event: %d\n", event);
 #endif
   return event;
 }
 
 void Button::enqueueEvent(int event) {
 #ifdef BUTTONS_DEBUG
-  SerialPrintf("Enqueue event: %d\n", event);
+  serial_printf("Enqueue event: %d\n", event);
 #endif
 
   int nextTail = (queueTail + 1) % BUTTONS_QUEUESIZE;
@@ -121,9 +122,9 @@ Buttons::~Buttons() {
 
 void Buttons::begin(void) {
   // Initialize all buttons
-  SerialPrintf("numButtons: %d\n", numButtons);
+  serial_printf("numButtons: %d\n", numButtons);
   for (int i = 0; i < this->numButtons; i++) {
-    SerialPrintf("buttonPins[%d]: %d\n", i, this->buttonPins[i]);
+    serial_printf("buttonPins[%d]: %d\n", i, this->buttonPins[i]);
     this->buttons[i].begin(this->buttonPins[i]);
   }
 }

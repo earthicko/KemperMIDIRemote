@@ -1,16 +1,13 @@
 #ifndef KEMPER_HPP
 #define KEMPER_HPP
 
+#include "LedDisplay.hpp"
 #include "LedSelector.hpp"
-#include <LedControl.h>
-#include <RH_ASK.h>
 
 class Kemper {
 public:
-  // Constructor
-  Kemper(RH_ASK &wireless, LedSelector &leds, LedControl &display);
+  Kemper(uint8_t *peerAddr, LedSelector &leds, LedDisplay &display);
 
-  // Destructor
   ~Kemper();
 
   void begin(void);
@@ -18,9 +15,9 @@ public:
   void changeCol(int newCol);
 
 private:
-  RH_ASK &wireless;
+  uint8_t *peerAddr;
   LedSelector &leds;
-  LedControl &display;
+  LedDisplay &display;
   int col;
   int row;
 

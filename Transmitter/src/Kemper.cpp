@@ -1,18 +1,16 @@
 #include "Kemper.hpp"
 #include "SerialPrintf.hpp"
+#include <esp_now.h>
 
-Kemper::Kemper(RH_ASK &wireless, LedSelector &leds, LedControl &display)
-    : col(0), row(0), wireless(wireless), leds(leds), display(display) {}
+Kemper::Kemper(uint8_t *peerAddr, LedSelector &leds, LedDisplay &display)
+    : col(0), row(0), peerAddr(peerAddr), leds(leds), display(display) {}
 
 Kemper::~Kemper() {}
 
 void Kemper::begin(void) {
   leds.begin(); // Initialize the LED selector
 
-  if (!wireless.init())
-    SerialPrintf("Wireless init failed\n");
-  else
-    SerialPrintf("Wireless init succeeded\n");
+  display.begin();
 
   this->sendProgramChange();
 }
@@ -21,17 +19,19 @@ void Kemper::sendProgramChange(void) {
   int program = row * 5 + col;
   int bank = 1; // Assuming bank is always 1 for this example
 
-  SerialPrintf("row: %d, col: %d\n", row, col);
-  SerialPrintf("Program Change: %d, Bank: %d\n", program, bank);
+  serial_printf("row: %d, col: %d\n", row, col);
+  serial_printf("Program Change: %d, Bank: %d\n", program, bank);
 
   uint8_t msg[2] = {(uint8_t)program, (uint8_t)bank};
 
-  if (this->wireless.send(msg, sizeof(msg))) {
-    this->wireless.waitPacketSent();
-    SerialPrintf("Sent Program %d, Bank %d\n", msg[0], msg[1]);
+  esp_err_t result = esp_now_send(peerAddr, (const uint8_t *)msg, sizeof(msg));
+
+  if (result == ESP_OK) {
+    serial_printf("Sent Program %d, Bank %d\n", msg[0], msg[1]);
     this->leds.select(col); // Select the LED corresponding to the column
+    this->display.showInt(row);
   } else {
-    SerialPrintf("Failed to send a message...\n");
+    serial_printf("Failed to send a message...\n");
   }
 }
 
