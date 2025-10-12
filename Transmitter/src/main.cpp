@@ -65,7 +65,6 @@ void setup() {
   }
 
   buttons.begin();
-  kemper.begin();
 
   // Once ESPNow is successfully Init, we will register for Send CB to
   // get the status of Trasnmitted packet
@@ -83,6 +82,8 @@ void setup() {
   }
   // Register for a callback function that will be called when data is received
   esp_now_register_recv_cb(esp_now_recv_cb_t(on_data_recv));
+
+  kemper.begin();
 }
 
 void loop() {
