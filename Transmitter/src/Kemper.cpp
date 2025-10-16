@@ -2,6 +2,10 @@
 #include "SerialPrintf.hpp"
 #include <esp_now.h>
 
+const String Kemper::predefRowNames[KEMPER_MAX_PREDEF_ROW_NAMES] = {
+    "1.FirE",
+};
+
 Kemper::Kemper(uint8_t *peerAddr, LedSelector &leds, LedDisplay &display)
     : col(0), row(0), peerAddr(peerAddr), leds(leds), display(display) {}
 
@@ -18,6 +22,8 @@ void Kemper::begin(void) {
 void Kemper::sendProgramChange(void) {
   int program = row * 5 + col;
   int bank = 1; // Assuming bank is always 1 for this example
+  static char unpredefinedRowNameBuffer[9] = {' ', ' ', ' ', ' ', ' ',
+                                              ' ', ' ', ' ', NULL};
 
   serial_printf("row: %d, col: %d\n", row, col);
   serial_printf("Program Change: %d, Bank: %d\n", program, bank);
@@ -29,9 +35,20 @@ void Kemper::sendProgramChange(void) {
   if (result == ESP_OK) {
     serial_printf("Sent Program %d, Bank %d\n", msg[0], msg[1]);
     this->leds.select(col); // Select the LED corresponding to the column
-    this->display.showInt(row);
+
+    if (row < KEMPER_MAX_PREDEF_ROW_NAMES &&
+        Kemper::predefRowNames[row] != NULL) {
+      serial_printf("Display pre-defined row name %s\n",
+                    Kemper::predefRowNames[row]);
+      this->display.showString(Kemper::predefRowNames[row]);
+    } else {
+      unpredefinedRowNameBuffer[0] = '1' + row;
+      serial_printf("Display row index %c\n", unpredefinedRowNameBuffer[0]);
+      this->display.showString(unpredefinedRowNameBuffer);
+    }
   } else {
     serial_printf("Failed to send a message...\n");
+    this->display.showString("Error0");
   }
 }
 
