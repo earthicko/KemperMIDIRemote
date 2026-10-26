@@ -3,7 +3,10 @@
 #include <esp_now.h>
 
 const String Kemper::predefRowNames[KEMPER_MAX_PREDEF_ROW_NAMES] = {
-    "1.FirE",
+    "1.E_DiSt",
+    "2.EbDiSt",
+    "3.E_Cln",
+    "4.E_bLS",
 };
 
 Kemper::Kemper(uint8_t *peerAddr, LedSelector &leds, LedDisplay &display)

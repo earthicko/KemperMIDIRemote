@@ -1,0 +1,7 @@
+{
+    "sketch": "Transmitter.ino",
+    "port": "COM7",
+    "configuration": "cpu=atmega2560",
+    "board": "arduino:avr:mega",
+    "programmer": "arduino:avrisp"
+}

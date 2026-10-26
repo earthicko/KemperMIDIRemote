@@ -1,0 +1,7 @@
+{
+    "sketch": "Receiver.ino",
+    "configuration": "cpu=atmega2560",
+    "board": "arduino:avr:mega",
+    "port": "COM10",
+    "programmer": "arduino:avrisp"
+}

@@ -8,10 +8,10 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "c:/Users/earth/Codes/KemperMIDIRemote/Transmitter_ESP32/include",
-                "c:/Users/earth/Codes/KemperMIDIRemote/Transmitter_ESP32/src",
+                "c:/Users/earth/Codes/KemperMIDIRemote/Transmitter/include",
+                "c:/Users/earth/Codes/KemperMIDIRemote/Transmitter/src",
                 "C:/Users/earth/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
-                "c:/Users/earth/Codes/KemperMIDIRemote/Transmitter_ESP32/.pio/libdeps/esp32doit-devkit-v1/LedControl/src",
+                "c:/Users/earth/Codes/KemperMIDIRemote/Transmitter/.pio/libdeps/esp32doit-devkit-v1/LedControl/src",
                 "C:/Users/earth/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                 "C:/Users/earth/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
                 "C:/Users/earth/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos",
@@ -245,10 +245,10 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "c:/Users/earth/Codes/KemperMIDIRemote/Transmitter_ESP32/include",
-                    "c:/Users/earth/Codes/KemperMIDIRemote/Transmitter_ESP32/src",
+                    "c:/Users/earth/Codes/KemperMIDIRemote/Transmitter/include",
+                    "c:/Users/earth/Codes/KemperMIDIRemote/Transmitter/src",
                     "C:/Users/earth/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
-                    "c:/Users/earth/Codes/KemperMIDIRemote/Transmitter_ESP32/.pio/libdeps/esp32doit-devkit-v1/LedControl/src",
+                    "c:/Users/earth/Codes/KemperMIDIRemote/Transmitter/.pio/libdeps/esp32doit-devkit-v1/LedControl/src",
                     "C:/Users/earth/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                     "C:/Users/earth/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
                     "C:/Users/earth/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos",
