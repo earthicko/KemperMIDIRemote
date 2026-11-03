@@ -1,0 +1,12 @@
+#ifndef CFG_HPP
+#define CFG_HPP
+
+#define PIN_UP 15
+#define PIN_DOWN 4
+#define PIN_PERFORMANCE_1 12
+#define PIN_PERFORMANCE_2 14
+#define PIN_PERFORMANCE_3 27
+#define PIN_PERFORMANCE_4 26
+#define PIN_PERFORMANCE_5 25
+
+#endif
